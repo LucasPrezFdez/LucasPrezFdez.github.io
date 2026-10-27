@@ -1,0 +1,2952 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Lucas Pérez Fernández — Desarrollador de aplicaciones multiplataforma</title>
+  <meta name="description" content="Portfolio de Lucas Pérez Fernández, Técnico Superior en DAM. Apps móviles con React Native, web con Next.js y Angular, y backend con Node.js y Spring Boot.">
+  <meta name="author" content="Lucas Pérez Fernández">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="color-scheme" content="light">
+  <!-- URL del sitio: GitHub Pages, repositorio LucasPrezFdez.github.io -->
+  <link rel="canonical" href="https://lucasprezfdez.github.io/">
+
+  <!-- Open Graph / Twitter Card -->
+  <!-- og:url, og:image y twitter:image deben ser URLs absolutas -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="Lucas Pérez Fernández">
+  <meta property="og:title" content="Lucas Pérez Fernández — Desarrollador de aplicaciones multiplataforma">
+  <meta property="og:description" content="Apps móviles, web y de escritorio, del modelo de datos a la interfaz.">
+  <meta property="og:url" content="https://lucasprezfdez.github.io/">
+  <meta property="og:image" content="https://lucasprezfdez.github.io/assets/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Lucas Pérez Fernández, desarrollador de aplicaciones multiplataforma">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lucas Pérez Fernández — Desarrollador de aplicaciones multiplataforma">
+  <meta name="twitter:description" content="Apps móviles, web y de escritorio, del modelo de datos a la interfaz.">
+  <meta name="twitter:image" content="https://lucasprezfdez.github.io/assets/img/og-image.png">
+  <meta name="twitter:image:alt" content="Lucas Pérez Fernández, desarrollador de aplicaciones multiplataforma">
+
+  <!-- Favicon SVG con iniciales -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23fff'/%3E%3Crect x='3' y='3' width='58' height='58' fill='none' stroke='%23000' stroke-width='6'/%3E%3Ctext x='32' y='42' font-family='Arial,Helvetica,sans-serif' font-size='26' font-weight='700' letter-spacing='-1' text-anchor='middle' fill='%23000'%3ELP%3C/text%3E%3C/svg%3E">
+
+  <!-- Fuentes: preconnect + carga no bloqueante con display=swap -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap"></noscript>
+
+  <script>document.documentElement.classList.add('js');</script>
+
+  <style>
+    /* ==========================================================================
+       ÍNDICE
+       01. Tokens del sistema de diseño
+       02. Reset y estilos base
+       03. Layout y utilidades
+       04. Componentes: iconos, enlaces, botones, etiquetas
+       05. Header y navegación
+       06. Menú móvil
+       07. Hero
+       08. Cabecera de sección
+       09. Proyectos
+       10. Modal de caso de estudio
+       11. Sobre mí y habilidades
+       12. Experiencia y formación (timeline)
+       13. Contacto y formulario
+       14. Footer
+       15. Animaciones de aparición
+       16. Movimiento reducido e impresión
+       ========================================================================== */
+
+    /* ==========================================================================
+       01. TOKENS
+       ========================================================================== */
+    :root {
+      /* Paleta: solo blanco, negro y grises */
+      --color-bg: #FFFFFF;
+      --color-text: #0A0A0A;
+      --color-black: #000000;
+      --color-gray-100: #F5F5F5;
+      --color-gray-300: #D4D4D4;
+      --color-gray-500: #737373;
+      --color-gray-800: #262626;
+
+      /* Variables de contexto (se reasignan en secciones invertidas y alternas) */
+      --surface: var(--color-bg);
+      --ink: var(--color-text);
+      --ink-strong: var(--color-black);
+      --muted: var(--color-gray-500);
+      --line: var(--color-gray-300);
+      --focus: var(--color-black);
+
+      /* Tipografía */
+      --font-display: "Inter Tight", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+      --fs-h1: clamp(2.75rem, 7vw, 6rem);
+      --fs-h2: clamp(2rem, 4vw, 3.25rem);
+      --fs-h3: clamp(1.25rem, 2vw, 1.5rem);
+      --fs-body: clamp(1rem, 1.1vw, 1.125rem);
+      --fs-lead: clamp(1.25rem, 2vw, 1.625rem);
+      --fs-display: clamp(2.75rem, 9vw, 7.5rem);
+      --fs-small: 0.9375rem;
+      --fs-label: 0.75rem;
+
+      /* Espaciado base 8px */
+      --space-1: 8px;
+      --space-2: 16px;
+      --space-3: 24px;
+      --space-4: 32px;
+      --space-5: 48px;
+      --space-6: 64px;
+      --space-7: 96px;
+      --space-8: 128px;
+
+      /* Layout */
+      --container: 1200px;
+      --gutter: 24px;
+      --grid-gap: 16px;
+      --section-y: 80px;
+      --header-h: 72px;
+
+      /* Movimiento */
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      --dur-fast: 200ms;
+      --dur: 400ms;
+      --dur-reveal: 600ms;
+    }
+
+    @media (min-width: 768px) {
+      :root {
+        --gutter: 32px;
+        --grid-gap: 24px;
+        --section-y: 96px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      :root {
+        --gutter: 48px;
+        --section-y: 128px;
+        --header-h: 80px;
+      }
+    }
+
+    /* ==========================================================================
+       02. RESET Y BASE
+       ========================================================================== */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    * {
+      margin: 0;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+      scroll-padding-top: calc(var(--header-h) + var(--space-3));
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      html {
+        scroll-behavior: smooth;
+      }
+    }
+
+    /* Bloqueo de scroll (menú y modal) compensando el ancho de la barra para evitar saltos */
+    html.is-locked {
+      overflow: hidden;
+      padding-right: var(--lock-gap, 0px);
+    }
+
+    html.is-locked .site-header {
+      padding-right: var(--lock-gap, 0px);
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: var(--surface);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: var(--fs-body);
+      font-weight: 400;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    img {
+      height: auto;
+    }
+
+    input,
+    button,
+    textarea {
+      font: inherit;
+      color: inherit;
+    }
+
+    button {
+      padding: 0;
+      border: 0;
+      background: none;
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ul[role="list"],
+    ol[role="list"] {
+      padding: 0;
+      list-style: none;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--ink-strong);
+      overflow-wrap: break-word;
+      text-wrap: balance;
+    }
+
+    p {
+      max-width: 65ch;
+    }
+
+    p,
+    li {
+      text-wrap: pretty;
+    }
+
+    dd {
+      margin: 0;
+    }
+
+    /* Foco visible sobre blanco y sobre negro (--focus cambia por contexto) */
+    :focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    [tabindex="-1"]:focus {
+      outline: none;
+    }
+
+    ::selection {
+      background-color: var(--color-black);
+      color: var(--color-bg);
+    }
+
+    .is-inverted ::selection {
+      background-color: var(--color-bg);
+      color: var(--color-black);
+    }
+
+    /* ==========================================================================
+       03. LAYOUT Y UTILIDADES
+       ========================================================================== */
+    .container {
+      width: 100%;
+      max-width: calc(var(--container) + 2 * var(--gutter));
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+
+    /* Grid de 4 columnas (móvil), 8 (tablet) y 12 (escritorio) */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      column-gap: var(--grid-gap);
+    }
+
+    @media (min-width: 768px) {
+      .grid {
+        grid-template-columns: repeat(8, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .grid {
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+      }
+    }
+
+    .section {
+      padding-block: var(--section-y);
+    }
+
+    .section--flush-top {
+      padding-top: 0;
+    }
+
+    /* Contexto invertido: fondo negro, texto blanco */
+    .is-inverted {
+      --surface: var(--color-black);
+      --ink: var(--color-bg);
+      --ink-strong: var(--color-bg);
+      --muted: var(--color-gray-300);
+      --line: var(--color-gray-800);
+      --focus: var(--color-bg);
+      background-color: var(--surface);
+      color: var(--ink);
+    }
+
+    /* Contexto alterno: fondo gris claro. El gris 500 no llega a 4.5:1 aquí, por eso se usa el 800 */
+    .is-alt {
+      --surface: var(--color-gray-100);
+      --muted: var(--color-gray-800);
+      background-color: var(--surface);
+    }
+
+    .label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-label);
+      font-weight: 400;
+      line-height: 1.5;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .visually-hidden {
+      position: absolute !important;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .sprite {
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: var(--space-2);
+      left: var(--space-2);
+      z-index: 1000;
+      padding: 12px 20px;
+      background-color: var(--color-black);
+      color: var(--color-bg);
+      font-weight: 500;
+      transform: translateY(calc(-100% - var(--space-4)));
+      transition: transform var(--dur-fast) var(--ease-out);
+    }
+
+    .skip-link:focus {
+      transform: none;
+    }
+
+    /* ==========================================================================
+       04. COMPONENTES
+       ========================================================================== */
+
+    /* Iconos (sprite SVG) */
+    .icon {
+      flex: none;
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Enlace con subrayado animado de izquierda a derecha */
+    .link {
+      padding-bottom: 2px;
+      background-image: linear-gradient(currentColor, currentColor);
+      background-position: 0 100%;
+      background-repeat: no-repeat;
+      background-size: 0% 1px;
+      transition: background-size var(--dur) var(--ease-out);
+    }
+
+    .link:hover,
+    .link:focus-visible {
+      background-size: 100% 1px;
+    }
+
+    /* Variante para enlaces dentro de texto: subrayado base siempre visible */
+    .link--inline {
+      background-image: linear-gradient(currentColor, currentColor), linear-gradient(var(--muted), var(--muted));
+      background-size: 0% 1px, 100% 1px;
+    }
+
+    .link--inline:hover,
+    .link--inline:focus-visible {
+      background-size: 100% 1px, 100% 1px;
+    }
+
+    /* Botones */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-1);
+      min-height: 48px;
+      padding: 14px 28px;
+      border: 1px solid var(--ink-strong);
+      font-family: var(--font-body);
+      font-size: var(--fs-small);
+      font-weight: 500;
+      line-height: 1.2;
+      text-align: center;
+      white-space: nowrap;
+      transition: background-color var(--dur-fast) ease, color var(--dur-fast) ease;
+    }
+
+    .btn--primary {
+      background-color: var(--ink-strong);
+      color: var(--surface);
+    }
+
+    .btn--primary:hover {
+      background-color: transparent;
+      color: var(--ink-strong);
+    }
+
+    .btn--secondary {
+      background-color: transparent;
+      color: var(--ink-strong);
+    }
+
+    .btn--secondary:hover {
+      background-color: var(--ink-strong);
+      color: var(--surface);
+    }
+
+    .btn--sm {
+      min-height: 44px;
+      padding: 10px 20px;
+    }
+
+    .btn .icon {
+      transition: transform var(--dur) var(--ease-out);
+    }
+
+    .btn:hover .icon--right {
+      transform: translateX(3px);
+    }
+
+    .btn:hover .icon--down {
+      transform: translateY(2px);
+    }
+
+    .btn:hover .icon--external {
+      transform: translate(2px, -2px);
+    }
+
+    .btn[aria-disabled="true"] {
+      cursor: progress;
+      opacity: 0.7;
+    }
+
+    /* Etiquetas */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-1);
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 12px;
+      border: 1px solid var(--line);
+      font-family: var(--font-mono);
+      font-size: var(--fs-label);
+      line-height: 1.4;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ==========================================================================
+       05. HEADER Y NAVEGACIÓN
+       ========================================================================== */
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 100;
+      height: var(--header-h);
+      border-bottom: 1px solid transparent;
+      background-color: var(--surface);
+      color: var(--ink);
+      transition:
+        transform var(--dur) var(--ease-out),
+        box-shadow var(--dur) ease,
+        border-color var(--dur) ease,
+        background-color var(--dur-fast) ease,
+        color var(--dur-fast) ease;
+    }
+
+    .site-header.is-scrolled {
+      border-bottom-color: var(--line);
+      box-shadow: 0 8px 24px -16px rgba(0, 0, 0, 0.18);
+    }
+
+    .site-header.is-hidden {
+      transform: translateY(-100%);
+    }
+
+    .site-header.is-inverted {
+      border-bottom-color: var(--line);
+      box-shadow: none;
+    }
+
+    .site-header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+      height: 100%;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 44px;
+      font-family: var(--font-display);
+      font-size: 1.0625rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .brand__mark {
+      display: inline-grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      background-color: var(--ink-strong);
+      color: var(--surface);
+      font-size: 0.75rem;
+      letter-spacing: 0.02em;
+      transition: background-color var(--dur-fast) ease, color var(--dur-fast) ease;
+    }
+
+    .site-nav {
+      display: none;
+    }
+
+    .site-nav__list {
+      display: flex;
+      gap: var(--space-4);
+    }
+
+    .site-nav__link {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      font-size: var(--fs-small);
+      font-weight: 500;
+    }
+
+    .site-nav__link::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 10px;
+      left: 0;
+      height: 1px;
+      background-color: currentColor;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform var(--dur) var(--ease-out);
+    }
+
+    .site-nav__link:hover::after,
+    .site-nav__link[aria-current="true"]::after {
+      transform: scaleX(1);
+    }
+
+    .menu-toggle {
+      position: relative;
+      width: 44px;
+      height: 44px;
+      margin-right: -10px;
+    }
+
+    .menu-toggle__bar {
+      position: absolute;
+      top: calc(50% - 0.75px);
+      left: 11px;
+      width: 22px;
+      height: 1.5px;
+      background-color: currentColor;
+      transition: transform var(--dur) var(--ease-out);
+    }
+
+    .menu-toggle__bar:nth-child(1) {
+      transform: translateY(-4px);
+    }
+
+    .menu-toggle__bar:nth-child(2) {
+      transform: translateY(4px);
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-toggle__bar:nth-child(1) {
+      transform: rotate(45deg);
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-toggle__bar:nth-child(2) {
+      transform: rotate(-45deg);
+    }
+
+    @media (min-width: 1024px) {
+      .site-nav {
+        display: flex;
+        align-items: center;
+        gap: var(--space-5);
+      }
+
+      .menu-toggle {
+        display: none;
+      }
+    }
+
+    /* ==========================================================================
+       06. MENÚ MÓVIL (panel negro a pantalla completa)
+       ========================================================================== */
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+      padding: calc(var(--header-h) + var(--space-4)) var(--gutter) var(--space-5);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity var(--dur) var(--ease-out), visibility 0s linear var(--dur);
+    }
+
+    .mobile-menu.is-open {
+      visibility: visible;
+      opacity: 1;
+      transition: opacity var(--dur) var(--ease-out);
+    }
+
+    .mobile-menu__item {
+      border-bottom: 1px solid var(--line);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out);
+    }
+
+    .mobile-menu.is-open .mobile-menu__item {
+      opacity: 1;
+      transform: none;
+      transition-delay: calc(80ms + var(--i, 0) * 60ms);
+    }
+
+    .mobile-menu__link {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-2);
+      padding-block: var(--space-2);
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 9vw, 3.25rem);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      transition: padding-left var(--dur) var(--ease-out), background-color var(--dur-fast) ease;
+    }
+
+    .mobile-menu__link:hover {
+      padding-left: var(--space-1);
+      background-color: var(--color-gray-800);
+    }
+
+    .mobile-menu__link .label {
+      min-width: 2.5ch;
+      color: var(--muted);
+    }
+
+    .mobile-menu__link[aria-current="true"] .label {
+      color: var(--ink);
+    }
+
+    .mobile-menu__footer {
+      display: grid;
+      justify-items: start;
+      gap: var(--space-3);
+      margin-top: auto;
+    }
+
+    .mobile-menu__social {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 var(--space-3);
+    }
+
+    .mobile-menu__social a,
+    .mobile-menu__email {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
+
+    @media (min-width: 1024px) {
+      .mobile-menu {
+        display: none;
+      }
+    }
+
+    /* ==========================================================================
+       07. HERO
+       ========================================================================== */
+    .hero {
+      position: relative;
+      display: flex;
+      min-height: 90vh;
+      min-height: 90svh;
+      padding-top: calc(var(--header-h) + var(--space-6));
+      padding-bottom: var(--space-7);
+    }
+
+    .hero__inner {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: var(--space-5);
+    }
+
+    .hero__status {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero__dot {
+      position: relative;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--ink-strong);
+    }
+
+    .hero__dot::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--ink-strong);
+      border-radius: 50%;
+      animation: pulse 2.4s var(--ease-out) infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.8; transform: scale(1); }
+      100% { opacity: 0; transform: scale(3); }
+    }
+
+    .hero__title {
+      margin-top: var(--space-4);
+      font-size: var(--fs-h1);
+      line-height: 1;
+    }
+
+    .hero__name,
+    .hero__role {
+      display: block;
+    }
+
+    /* El título profesional va a menor tamaño que el nombre para que palabras largas
+       como "multiplataforma" quepan en 320px sin partirse */
+    .hero__role {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: clamp(1.75rem, 4.4vw, 4rem);
+      line-height: 1.05;
+    }
+
+    .hero__bottom {
+      row-gap: var(--space-5);
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--line);
+    }
+
+    .hero__intro {
+      grid-column: 1 / -1;
+    }
+
+    .hero__lead {
+      max-width: 30ch;
+      font-family: var(--font-display);
+      font-size: var(--fs-lead);
+      font-weight: 500;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      color: var(--ink-strong);
+    }
+
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: var(--space-4);
+    }
+
+    .hero__meta {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-content: end;
+      gap: var(--space-3);
+    }
+
+    .hero__meta div {
+      display: grid;
+      gap: 4px;
+    }
+
+    .hero__meta dt {
+      color: var(--muted);
+    }
+
+    .hero__meta dd {
+      font-size: var(--fs-small);
+      font-weight: 500;
+    }
+
+    .hero__scroll {
+      position: absolute;
+      bottom: var(--space-3);
+      left: 50%;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-1);
+      color: var(--muted);
+      transform: translateX(-50%);
+    }
+
+    .hero__scroll-line {
+      position: relative;
+      width: 1px;
+      height: 40px;
+      overflow: hidden;
+      background-color: var(--line);
+    }
+
+    .hero__scroll-line::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background-color: var(--ink-strong);
+      animation: scroll-hint 2s var(--ease-out) infinite;
+    }
+
+    @keyframes scroll-hint {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(200%); }
+    }
+
+    @media (min-width: 768px) {
+      .hero__meta {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .hero__scroll {
+        display: flex;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .hero__inner {
+        gap: var(--space-6);
+      }
+
+      .hero__intro {
+        grid-column: 1 / span 6;
+      }
+
+      .hero__meta {
+        grid-column: 8 / -1;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    /* ==========================================================================
+       08. CABECERA DE SECCIÓN ("01 — Título")
+       ========================================================================== */
+    .section-head {
+      align-items: baseline;
+      row-gap: var(--space-2);
+      margin-bottom: var(--space-6);
+      padding-top: var(--space-3);
+      border-top: 1px solid var(--ink-strong);
+    }
+
+    .section-head__num {
+      grid-column: 1 / -1;
+      color: var(--muted);
+    }
+
+    .section-head__title {
+      grid-column: 1 / -1;
+      font-size: var(--fs-h2);
+    }
+
+    .section-head__desc {
+      grid-column: 1 / -1;
+      max-width: 40ch;
+      color: var(--muted);
+      font-size: var(--fs-small);
+    }
+
+    @media (min-width: 768px) {
+      .section-head__num {
+        grid-column: 1 / span 2;
+      }
+
+      .section-head__title,
+      .section-head__desc {
+        grid-column: 3 / -1;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .section-head {
+        margin-bottom: var(--space-7);
+      }
+
+      .section-head__num {
+        grid-column: 1 / span 3;
+      }
+
+      .section-head__title {
+        grid-column: 4 / span 6;
+      }
+
+      .section-head__desc {
+        grid-column: 10 / -1;
+        align-self: end;
+      }
+
+      .section-head--display .section-head__title {
+        grid-column: 4 / -1;
+      }
+    }
+
+    /* ==========================================================================
+       09. PROYECTOS
+       ========================================================================== */
+    .projects {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: var(--space-6);
+    }
+
+    /* Columnas escalonadas: la segunda columna arranca más abajo */
+    @media (min-width: 768px) {
+      .projects {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: var(--space-4);
+        row-gap: 0;
+      }
+
+      .projects > :nth-child(even) {
+        margin-top: var(--space-7);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .projects {
+        column-gap: var(--space-5);
+      }
+
+      .projects > :nth-child(even) {
+        margin-top: var(--space-8);
+      }
+    }
+
+    .project-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .project-card__media {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background-color: var(--color-gray-100);
+    }
+
+    .project-card__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%);
+      transition: filter 400ms ease, transform 800ms var(--ease-out);
+    }
+
+    .project-card:focus-within .project-card__media img {
+      filter: grayscale(0%);
+    }
+
+    @media (hover: hover) {
+      .project-card:hover .project-card__media img {
+        filter: grayscale(0%);
+        transform: scale(1.03);
+      }
+    }
+
+    .project-card__body {
+      display: grid;
+      gap: 12px;
+    }
+
+    .project-card__head {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: baseline;
+      column-gap: var(--space-2);
+    }
+
+    .project-card__index,
+    .project-card__year {
+      color: var(--muted);
+    }
+
+    .project-card__title {
+      font-size: var(--fs-h3);
+    }
+
+    .project-card__role {
+      color: var(--muted);
+      font-size: var(--fs-small);
+    }
+
+    .project-card__trigger {
+      display: inline-flex;
+      align-items: center;
+      justify-self: start;
+      gap: var(--space-1);
+      margin-top: 4px;
+      font-size: var(--fs-small);
+      font-weight: 500;
+    }
+
+    .project-card__trigger .icon {
+      transition: transform var(--dur) var(--ease-out);
+    }
+
+    .project-card:hover .project-card__trigger .icon,
+    .project-card__trigger:focus-visible .icon {
+      transform: translateX(4px);
+    }
+
+    /* Toda la tarjeta es clicable a través del botón "Ver caso de estudio" */
+    .project-card__trigger::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .project-card__trigger:focus-visible {
+      outline: none;
+    }
+
+    .project-card__trigger:focus-visible::after {
+      outline: 2px solid var(--focus);
+      outline-offset: 6px;
+    }
+
+    /* ==========================================================================
+       10. MODAL DE CASO DE ESTUDIO
+       ========================================================================== */
+    .case-dialog {
+      width: 100%;
+      max-width: 100%;
+      height: 100%;
+      max-height: 100%;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      overflow: hidden;
+      background-color: var(--color-bg);
+      color: var(--color-text);
+    }
+
+    .case-dialog[open] {
+      display: flex;
+      flex-direction: column;
+      animation: dialog-in var(--dur) var(--ease-out);
+    }
+
+    .case-dialog::backdrop {
+      background-color: rgba(0, 0, 0, 0.72);
+    }
+
+    .case-dialog[open]::backdrop {
+      animation: fade-in var(--dur) ease;
+    }
+
+    @keyframes dialog-in {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @media (min-width: 1024px) {
+      .case-dialog {
+        width: min(1080px, calc(100% - 96px));
+        height: calc(100% - 64px);
+        margin: auto;
+      }
+    }
+
+    .case-dialog__bar {
+      display: flex;
+      flex: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-2);
+      height: 64px;
+      padding-inline: var(--gutter);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .case-dialog__counter {
+      color: var(--muted);
+    }
+
+    .case-dialog__close {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      min-width: 44px;
+      min-height: 44px;
+      margin-right: -4px;
+      padding-inline: 4px;
+      font-size: var(--fs-small);
+      font-weight: 500;
+    }
+
+    .case-dialog__scroll {
+      flex: 1;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+
+    .case {
+      padding: var(--space-5) var(--gutter) var(--space-7);
+    }
+
+    @media (min-width: 1024px) {
+      .case {
+        padding: var(--space-6) var(--space-7) var(--space-7);
+      }
+    }
+
+    .case__header {
+      display: grid;
+      gap: var(--space-3);
+    }
+
+    .case__eyebrow {
+      color: var(--muted);
+    }
+
+    .case__title {
+      font-size: var(--fs-h2);
+    }
+
+    .case__summary {
+      max-width: 34ch;
+      font-family: var(--font-display);
+      font-size: var(--fs-lead);
+      font-weight: 500;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+    }
+
+    .case__meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-3);
+      margin-top: var(--space-2);
+      padding-top: var(--space-3);
+      border-top: 1px solid var(--line);
+    }
+
+    .case__meta div {
+      display: grid;
+      gap: 4px;
+    }
+
+    .case__meta dt {
+      color: var(--muted);
+    }
+
+    .case__meta dd {
+      font-size: var(--fs-small);
+      font-weight: 500;
+    }
+
+    .case__media {
+      margin-block: var(--space-5) var(--space-3);
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background-color: var(--color-gray-100);
+    }
+
+    .case__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%);
+      transition: filter 400ms ease;
+    }
+
+    .case__media:hover img {
+      filter: grayscale(0%);
+    }
+
+    .case__block {
+      display: grid;
+      gap: var(--space-2);
+      padding-block: var(--space-4);
+      border-top: 1px solid var(--line);
+    }
+
+    .case__block-title {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      font-size: var(--fs-h3);
+    }
+
+    .case__block-title .label {
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    .case__steps {
+      display: grid;
+      gap: 12px;
+      counter-reset: step;
+    }
+
+    .case__steps li {
+      display: grid;
+      grid-template-columns: 2.5rem minmax(0, 1fr);
+      counter-increment: step;
+    }
+
+    .case__steps li::before {
+      content: counter(step, decimal-leading-zero);
+      padding-top: 0.3em;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: var(--fs-label);
+    }
+
+    .metrics {
+      display: grid;
+      gap: var(--space-3);
+    }
+
+    .metric {
+      display: flex;
+      flex-direction: column-reverse;
+      justify-content: flex-end;
+      gap: var(--space-1);
+      padding-top: var(--space-2);
+      border-top: 1px solid var(--ink-strong);
+    }
+
+    .metric__value {
+      font-family: var(--font-display);
+      font-size: clamp(2.25rem, 4vw, 3.25rem);
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--ink-strong);
+    }
+
+    .metric__label {
+      color: var(--muted);
+      font-size: var(--fs-small);
+    }
+
+    .case__footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--line);
+    }
+
+    @media (min-width: 768px) {
+      .case__meta {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .case__block {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+        column-gap: var(--space-4);
+      }
+
+      .metrics {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    /* ==========================================================================
+       11. SOBRE MÍ Y HABILIDADES
+       ========================================================================== */
+    .about {
+      align-items: start;
+      row-gap: var(--space-5);
+    }
+
+    .about__media {
+      grid-column: 1 / -1;
+    }
+
+    .about__media img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      background-color: var(--color-gray-300);
+      filter: grayscale(100%);
+    }
+
+    .about__content {
+      grid-column: 1 / -1;
+    }
+
+    .about__lead {
+      max-width: 26ch;
+      font-family: var(--font-display);
+      font-size: var(--fs-lead);
+      font-weight: 500;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      color: var(--ink-strong);
+    }
+
+    .about__text {
+      display: grid;
+      gap: var(--space-2);
+      margin-top: var(--space-4);
+    }
+
+    /* Móvil: cifra y etiqueta en fila. Desde 480px: tres columnas */
+    .facts {
+      display: grid;
+      gap: var(--space-2);
+      margin-top: var(--space-5);
+    }
+
+    .fact {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+      align-items: baseline;
+      gap: var(--space-2);
+      padding-top: var(--space-2);
+      border-top: 1px solid var(--ink-strong);
+    }
+
+    @media (min-width: 480px) {
+      .facts {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .fact {
+        flex-direction: column-reverse;
+        align-items: stretch;
+        gap: var(--space-1);
+      }
+    }
+
+    .fact__value {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--ink-strong);
+    }
+
+    .fact__label {
+      color: var(--muted);
+    }
+
+    .about__cta {
+      margin-top: var(--space-5);
+    }
+
+    .skills {
+      margin-top: var(--space-7);
+    }
+
+    .skills__title {
+      margin-bottom: var(--space-4);
+      font-size: var(--fs-h3);
+    }
+
+    .skills__groups {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-4) var(--space-3);
+    }
+
+    .skill-group {
+      display: grid;
+      align-content: start;
+      gap: var(--space-2);
+      padding-top: var(--space-2);
+      border-top: 1px solid var(--line);
+    }
+
+    .skill-group__title {
+      font-family: var(--font-mono);
+      font-size: var(--fs-label);
+      font-weight: 400;
+      line-height: 1.5;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    @media (min-width: 480px) {
+      .skills__groups {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 768px) {
+      .about__media {
+        grid-column: 1 / span 3;
+      }
+
+      .about__content {
+        grid-column: 4 / -1;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .about__media {
+        position: sticky;
+        top: calc(var(--header-h) + var(--space-3));
+        grid-column: 1 / span 5;
+      }
+
+      .about__content {
+        grid-column: 7 / -1;
+      }
+
+      .skills__groups {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    /* ==========================================================================
+       12. EXPERIENCIA Y FORMACIÓN (timeline vertical)
+       ========================================================================== */
+    .timeline {
+      position: relative;
+    }
+
+    /* Línea vertical */
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 4px;
+      width: 1px;
+      background-color: var(--line);
+    }
+
+    .timeline__item {
+      --item-pad: var(--space-4);
+      position: relative;
+      display: grid;
+      gap: 12px;
+      padding: var(--item-pad) 0 var(--item-pad) var(--space-4);
+    }
+
+    /* Marcador cuadrado sobre la línea */
+    .timeline__item::before {
+      content: "";
+      position: absolute;
+      top: calc(var(--item-pad) + 9px);
+      left: 0;
+      width: 9px;
+      height: 9px;
+      border: 1px solid var(--ink-strong);
+      background-color: var(--surface);
+    }
+
+    .timeline__item--current::before {
+      background-color: var(--ink-strong);
+    }
+
+    /* Divisor de 1px */
+    .timeline__item::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: var(--space-4);
+      height: 1px;
+      background-color: var(--line);
+    }
+
+    .timeline__date {
+      padding-top: 4px;
+      color: var(--muted);
+    }
+
+    .timeline__role {
+      font-size: var(--fs-h3);
+    }
+
+    .timeline__org {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: var(--fs-small);
+    }
+
+    .timeline__list {
+      display: grid;
+      gap: var(--space-1);
+      margin-top: var(--space-2);
+    }
+
+    .timeline__list li {
+      position: relative;
+      max-width: 65ch;
+      padding-left: var(--space-3);
+    }
+
+    .timeline__list li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+    }
+
+    .timeline__type {
+      color: var(--muted);
+    }
+
+    .timeline--compact .timeline__item {
+      --item-pad: var(--space-3);
+      gap: 4px;
+    }
+
+    .timeline--compact .timeline__role {
+      font-size: 1.125rem;
+      letter-spacing: -0.01em;
+    }
+
+    @media (min-width: 1024px) {
+      .timeline__item {
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        column-gap: var(--grid-gap);
+        padding-left: 0;
+      }
+
+      .timeline__date {
+        grid-column: 1 / span 3;
+        padding-left: var(--space-4);
+      }
+
+      .timeline__body {
+        grid-column: 4 / -1;
+      }
+
+      .timeline--compact .timeline__body {
+        grid-column: 4 / span 7;
+      }
+
+      .timeline--compact .timeline__type {
+        grid-column: 11 / -1;
+        padding-top: 4px;
+        text-align: right;
+      }
+    }
+
+    /* ==========================================================================
+       13. CONTACTO Y FORMULARIO (sección invertida)
+       ========================================================================== */
+    .contact__title {
+      font-size: var(--fs-display);
+      line-height: 0.95;
+    }
+
+    .contact__intro {
+      row-gap: var(--space-4);
+    }
+
+    .contact__lead {
+      grid-column: 1 / -1;
+      max-width: 52ch;
+      color: var(--muted);
+      font-size: var(--fs-lead);
+      line-height: 1.4;
+    }
+
+    .contact__email-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-2) var(--space-3);
+      margin-top: var(--space-5);
+      padding-block: var(--space-4);
+      border-block: 1px solid var(--line);
+    }
+
+    .contact__email {
+      min-width: 0;
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 4.5vw, 3.5rem);
+      font-weight: 500;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      overflow-wrap: anywhere;
+    }
+
+    .contact__copy .icon--check,
+    .contact__copy.is-copied .icon--copy {
+      display: none;
+    }
+
+    .contact__copy.is-copied .icon--check {
+      display: block;
+    }
+
+    .contact__grid {
+      row-gap: var(--space-6);
+      margin-top: var(--space-6);
+    }
+
+    .contact__aside,
+    .contact__form-wrap {
+      grid-column: 1 / -1;
+    }
+
+    .contact__aside {
+      display: grid;
+      align-content: start;
+      gap: var(--space-5);
+    }
+
+    .contact__block {
+      display: grid;
+      gap: 12px;
+    }
+
+    .contact__block-title {
+      color: var(--muted);
+    }
+
+    .social-list a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-2);
+      min-height: 56px;
+      border-bottom: 1px solid var(--line);
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      transition: padding var(--dur) var(--ease-out), background-color var(--dur-fast) ease;
+    }
+
+    .social-list li:first-child a {
+      border-top: 1px solid var(--line);
+    }
+
+    .social-list a:hover {
+      padding-inline: 12px;
+      background-color: var(--color-gray-800);
+    }
+
+    .contact__form-title {
+      margin-bottom: var(--space-3);
+      font-size: var(--fs-h3);
+    }
+
+    .form {
+      display: grid;
+      gap: var(--space-3);
+    }
+
+    .form__note,
+    .field__hint {
+      color: var(--muted);
+      font-size: 0.875rem;
+    }
+
+    .field {
+      display: grid;
+      gap: var(--space-1);
+    }
+
+    .field__input {
+      width: 100%;
+      min-height: 52px;
+      padding: 13px 16px;
+      border: 1px solid var(--color-gray-500);
+      border-radius: 0;
+      background-color: transparent;
+      color: var(--ink);
+      font-size: 1rem;
+      line-height: 1.5;
+      appearance: none;
+      transition: border-color var(--dur-fast) ease;
+    }
+
+    .field__input:hover {
+      border-color: var(--color-gray-300);
+    }
+
+    .field__input:focus {
+      border-color: var(--ink-strong);
+    }
+
+    textarea.field__input {
+      min-height: 168px;
+      resize: vertical;
+    }
+
+    .field__input[aria-invalid="true"] {
+      border-width: 2px;
+      border-color: var(--ink-strong);
+      padding: 12px 15px;
+    }
+
+    .field__input:-webkit-autofill {
+      -webkit-text-fill-color: var(--ink);
+      box-shadow: 0 0 0 100px var(--surface) inset;
+    }
+
+    /* Error accesible: icono + texto, sin depender del color */
+    .field__error {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-1);
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .field__error::before {
+      content: "!";
+      display: inline-grid;
+      flex: none;
+      place-items: center;
+      width: 18px;
+      height: 18px;
+      margin-top: 1px;
+      background-color: var(--ink-strong);
+      color: var(--surface);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      line-height: 1;
+    }
+
+    .field__error:empty {
+      display: none;
+    }
+
+    .form__honeypot {
+      position: absolute;
+      left: -9999px;
+    }
+
+    .form__status:not(:empty) {
+      padding: var(--space-2);
+      border: 1px solid var(--ink-strong);
+      font-size: var(--fs-small);
+    }
+
+    .form__status[data-state="error"]:not(:empty) {
+      border-width: 2px;
+    }
+
+    @media (min-width: 1024px) {
+      .contact__lead {
+        grid-column: 4 / span 7;
+      }
+
+      .contact__aside {
+        grid-column: 1 / span 4;
+      }
+
+      .contact__form-wrap {
+        grid-column: 6 / -1;
+      }
+    }
+
+    /* ==========================================================================
+       14. FOOTER
+       ========================================================================== */
+    .site-footer {
+      padding-bottom: var(--space-4);
+    }
+
+    .site-footer__inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      padding-top: var(--space-3);
+      border-top: 1px solid var(--line);
+    }
+
+    .site-footer__copy {
+      color: var(--muted);
+    }
+
+    .site-footer__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 var(--space-3);
+    }
+
+    .site-footer__links a,
+    .back-to-top {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      min-height: 44px;
+    }
+
+    .back-to-top .icon {
+      transition: transform var(--dur) var(--ease-out);
+    }
+
+    .back-to-top:hover .icon {
+      transform: translateY(-3px);
+    }
+
+    @media (min-width: 768px) {
+      .site-footer__inner {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    /* ==========================================================================
+       15. ANIMACIONES DE APARICIÓN (solo con JS activo)
+       ========================================================================== */
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity var(--dur-reveal) ease-out, transform var(--dur-reveal) ease-out;
+      transition-delay: calc(var(--i, 0) * 90ms);
+    }
+
+    .js .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ==========================================================================
+       16. MOVIMIENTO REDUCIDO E IMPRESIÓN
+       ========================================================================== */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      .js .reveal {
+        opacity: 1;
+        transform: none;
+      }
+
+      .hero__dot::after,
+      .hero__scroll-line::after {
+        display: none;
+      }
+    }
+
+    @media print {
+      .site-header,
+      .mobile-menu,
+      .hero__scroll,
+      .form,
+      .back-to-top {
+        display: none !important;
+      }
+
+      .js .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+  </style>
+
+  <!-- Datos estructurados (schema.org Person) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Lucas Pérez Fernández",
+    "jobTitle": "Desarrollador de aplicaciones multiplataforma",
+    "description": "Técnico Superior en DAM. Apps móviles con React Native, web con Next.js y Angular, y backend con Node.js y Spring Boot.",
+    "url": "https://lucasprezfdez.github.io/",
+    "image": "https://lucasprezfdez.github.io/assets/img/retrato.webp",
+    "email": "mailto:lucasperezfernandez0@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Redondela",
+      "addressRegion": "Pontevedra",
+      "addressCountry": "ES"
+    },
+    "alumniOf": [
+      { "@type": "EducationalOrganization", "name": "CPR Cebem" },
+      { "@type": "EducationalOrganization", "name": "IES Pedro Floriani" }
+    ],
+    "knowsAbout": ["TypeScript", "React", "React Native", "Next.js", "Angular", "Node.js", "Java", "Spring Boot", "PostgreSQL", "MySQL", "Supabase"],
+    "sameAs": [
+      "https://github.com/LucasPrezFdez"
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <!-- Sprite de iconos -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-arrow-right" viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+    <symbol id="i-arrow-down" viewBox="0 0 16 16"><path d="M8 2v11M4 9l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+    <symbol id="i-arrow-up" viewBox="0 0 16 16"><path d="M8 14V3M4 7l4-4 4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+    <symbol id="i-external" viewBox="0 0 16 16"><path d="M4 12l8-8M5.5 4H12v6.5" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+    <symbol id="i-download" viewBox="0 0 16 16"><path d="M8 2v8M4.5 6.5L8 10l3.5-3.5M2.5 13.5h11" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 16 16"><path d="M5.5 5.5h8v8h-8zM10.5 5.5v-3h-8v8h3" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 16 16"><path d="M2.5 8.5l3.5 3.5 7.5-8" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+    <symbol id="i-close" viewBox="0 0 16 16"><path d="M3 3l10 10M13 3L3 13" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!-- ======================================================================
+       HEADER
+       ====================================================================== -->
+  <header class="site-header" data-header>
+    <div class="container site-header__inner">
+      <a class="brand" href="#inicio">
+        <span class="brand__mark" aria-hidden="true">LP</span>
+        <span>Lucas Pérez</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Menú principal">
+        <ul class="site-nav__list" role="list">
+          <li><a class="site-nav__link" href="#proyectos" data-nav-link>Proyectos</a></li>
+          <li><a class="site-nav__link" href="#sobre-mi" data-nav-link>Sobre mí</a></li>
+          <li><a class="site-nav__link" href="#experiencia" data-nav-link>Experiencia</a></li>
+          <li><a class="site-nav__link" href="#contacto" data-nav-link>Contacto</a></li>
+        </ul>
+        <!-- Si actualizas el CV, sustituye assets/cv-lucas-perez-fernandez.pdf manteniendo el nombre -->
+        <a class="btn btn--secondary btn--sm" href="assets/cv-lucas-perez-fernandez.pdf" download>
+          Descargar CV
+          <svg class="icon icon--down" aria-hidden="true" focusable="false"><use href="#i-download"/></svg>
+        </a>
+      </nav>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-movil" aria-label="Abrir menú" data-menu-toggle>
+        <span class="menu-toggle__bar" aria-hidden="true"></span>
+        <span class="menu-toggle__bar" aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Menú móvil a pantalla completa -->
+  <div class="mobile-menu is-inverted" id="menu-movil" data-menu>
+    <nav aria-label="Menú principal">
+      <ol class="mobile-menu__list" role="list">
+        <li class="mobile-menu__item" style="--i: 0"><a class="mobile-menu__link" href="#proyectos" data-nav-link><span class="label">01</span>Proyectos</a></li>
+        <li class="mobile-menu__item" style="--i: 1"><a class="mobile-menu__link" href="#sobre-mi" data-nav-link><span class="label">02</span>Sobre mí</a></li>
+        <li class="mobile-menu__item" style="--i: 2"><a class="mobile-menu__link" href="#experiencia" data-nav-link><span class="label">03</span>Experiencia</a></li>
+        <li class="mobile-menu__item" style="--i: 3"><a class="mobile-menu__link" href="#contacto" data-nav-link><span class="label">04</span>Contacto</a></li>
+      </ol>
+    </nav>
+    <div class="mobile-menu__footer">
+      <a class="btn btn--primary" href="assets/cv-lucas-perez-fernandez.pdf" download>
+        Descargar CV
+        <svg class="icon icon--down" aria-hidden="true" focusable="false"><use href="#i-download"/></svg>
+      </a>
+      <a class="mobile-menu__email link" href="mailto:lucasperezfernandez0@gmail.com">lucasperezfernandez0@gmail.com</a>
+      <ul class="mobile-menu__social label" role="list">
+        <li><a class="link" href="https://github.com/LucasPrezFdez" target="_blank" rel="noopener noreferrer">GitHub<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <main id="contenido" tabindex="-1">
+
+    <!-- ====================================================================
+         HERO
+         ==================================================================== -->
+    <section class="hero" id="inicio" data-section="" aria-labelledby="hero-title">
+      <div class="container hero__inner">
+        <div>
+          <!-- REEMPLAZAR: disponibilidad -->
+          <p class="hero__status label"><span class="hero__dot" aria-hidden="true"></span>Disponible para nuevas oportunidades</p>
+          <h1 class="hero__title" id="hero-title">
+            <span class="hero__name">Lucas Pérez Fernández</span>
+            <span class="hero__role">Desarrollador de aplicaciones multiplataforma</span>
+          </h1>
+        </div>
+
+        <div class="hero__bottom grid">
+          <div class="hero__intro">
+            <p class="hero__lead">Construyo aplicaciones móviles, web y de escritorio, del modelo de datos a la interfaz.</p>
+            <div class="hero__actions">
+              <a class="btn btn--primary" href="#proyectos">
+                Ver proyectos
+                <svg class="icon icon--down" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg>
+              </a>
+              <a class="btn btn--secondary" href="#contacto">Contactar</a>
+            </div>
+          </div>
+
+          <!-- REEMPLAZAR: "Busco" si quieres concretar modalidad (remoto, presencial, híbrido) -->
+          <dl class="hero__meta">
+            <div><dt class="label">Base</dt><dd>Redondela, Pontevedra</dd></div>
+            <div><dt class="label">Formación</dt><dd>DAM · 2024–2026</dd></div>
+            <div><dt class="label">Experiencia</dt><dd>Menos de 1 año</dd></div>
+            <div><dt class="label">Busco</dt><dd>Puesto junior</dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="hero__scroll" aria-hidden="true">
+        <span class="label">Scroll</span>
+        <span class="hero__scroll-line"></span>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         01 — PROYECTOS
+         Proyectos reales de github.com/LucasPrezFdez. El atributo data-open-case
+         de cada tarjeta debe coincidir con el id de su caso en el modal.
+         ==================================================================== -->
+    <section class="section" id="proyectos" data-section="proyectos" aria-labelledby="proyectos-title">
+      <div class="container">
+        <div class="section-head grid reveal">
+          <p class="section-head__num label" aria-hidden="true">01 —</p>
+          <h2 class="section-head__title" id="proyectos-title">Proyectos seleccionados</h2>
+          <p class="section-head__desc">Dos proyectos de mi GitHub: una plataforma web y una aplicación de escritorio. Todo el código es público.</p>
+        </div>
+
+        <div class="projects">
+          <article class="project-card reveal">
+            <div class="project-card__media">
+              <img src="assets/img/proyecto-gameindex.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Portada de GameIndex con algunas de sus rutas, como /games, /rankings/top-50 y /lists, y sus cifras: 29 páginas, 39 endpoints y 65 componentes.">
+            </div>
+            <div class="project-card__body">
+              <div class="project-card__head">
+                <span class="project-card__index label">01</span>
+                <h3 class="project-card__title">GameIndex — Reseñas de videojuegos</h3>
+                <span class="project-card__year label">2026</span>
+              </div>
+              <p class="project-card__role">Proyecto de fin de ciclo · Full stack</p>
+              <ul class="tags" role="list">
+                <li class="tag">Next.js</li>
+                <li class="tag">TypeScript</li>
+                <li class="tag">PostgreSQL</li>
+              </ul>
+              <button class="project-card__trigger" type="button" aria-haspopup="dialog" data-open-case="caso-gameindex">
+                Ver caso de estudio<span class="visually-hidden">: GameIndex — Reseñas de videojuegos</span>
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg>
+              </button>
+            </div>
+          </article>
+
+          <article class="project-card reveal" style="--i: 1">
+            <div class="project-card__media">
+              <img src="assets/img/proyecto-desktopfriend.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Seis poses del perro 3D de DesktopFriend: de pie, sentado, jugando, andando, comiendo de su cuenco y cogido por el collar.">
+            </div>
+            <div class="project-card__body">
+              <div class="project-card__head">
+                <span class="project-card__index label">02</span>
+                <h3 class="project-card__title">DesktopFriend — Mascota de escritorio</h3>
+                <span class="project-card__year label">2026</span>
+              </div>
+              <p class="project-card__role">Proyecto personal · Aplicación de escritorio</p>
+              <ul class="tags" role="list">
+                <li class="tag">Tauri</li>
+                <li class="tag">Three.js</li>
+                <li class="tag">TypeScript</li>
+              </ul>
+              <button class="project-card__trigger" type="button" aria-haspopup="dialog" data-open-case="caso-desktopfriend">
+                Ver caso de estudio<span class="visually-hidden">: DesktopFriend — Mascota de escritorio</span>
+                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg>
+              </button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         02 — SOBRE MÍ
+         ==================================================================== -->
+    <section class="section is-alt" id="sobre-mi" data-section="sobre-mi" aria-labelledby="sobre-mi-title">
+      <div class="container">
+        <div class="section-head grid reveal">
+          <p class="section-head__num label" aria-hidden="true">02 —</p>
+          <h2 class="section-head__title" id="sobre-mi-title">Sobre mí</h2>
+        </div>
+
+        <div class="about grid">
+          <figure class="about__media reveal">
+            <!-- Foto extraída del CV (464×580). Si tienes una de más resolución en 4:5, sustitúyela -->
+            <img src="assets/img/retrato.webp" width="464" height="580" loading="lazy" decoding="async" alt="Retrato de Lucas Pérez Fernández, con gafas y sudadera clara.">
+          </figure>
+
+          <div class="about__content reveal" style="--i: 1">
+            <p class="about__lead">Desarrollo aplicaciones completas: base de datos, API e interfaz.</p>
+            <div class="about__text">
+              <p>Soy Técnico Superior en Desarrollo de Aplicaciones Multiplataforma (CPR Cebem, 2026). Antes me formé como Técnico en Instalaciones de Telecomunicaciones, así que también conozco el lado del hardware.</p>
+              <p>En mis prácticas en Siweb AI Solutions desarrollé dos apps móviles con React Native: NexusCall, de llamadas, y NutrIA, de fitness y nutrición, con MySQL y Supabase.</p>
+              <p>Como proyecto de fin de ciclo construí GameIndex, una plataforma de reseñas de videojuegos con Next.js, TypeScript y PostgreSQL. Ahora trabajo en DesktopFriend, una mascota 3D para el escritorio de Windows.</p>
+            </div>
+
+            <dl class="facts">
+              <div class="fact"><dt class="fact__label label">Repositorios propios en GitHub</dt><dd class="fact__value">23</dd></div>
+              <div class="fact"><dt class="fact__label label">Prácticas en empresa</dt><dd class="fact__value">2</dd></div>
+              <div class="fact"><dt class="fact__label label">Idiomas: gallego, castellano e inglés</dt><dd class="fact__value">3</dd></div>
+            </dl>
+
+            <div class="about__cta">
+              <a class="btn btn--primary" href="assets/cv-lucas-perez-fernandez.pdf" download>
+                Descargar CV en PDF
+                <svg class="icon icon--down" aria-hidden="true" focusable="false"><use href="#i-download"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="skills">
+          <h3 class="skills__title reveal">Habilidades y herramientas</h3>
+          <div class="skills__groups">
+            <div class="skill-group reveal">
+              <h4 class="skill-group__title">Front-end</h4>
+              <ul class="tags" role="list">
+                <li class="tag">TypeScript</li>
+                <li class="tag">JavaScript</li>
+                <li class="tag">React</li>
+                <li class="tag">Next.js</li>
+                <li class="tag">Angular</li>
+                <li class="tag">Astro</li>
+                <li class="tag">Tailwind CSS</li>
+                <li class="tag">Bootstrap</li>
+              </ul>
+            </div>
+            <div class="skill-group reveal" style="--i: 1">
+              <h4 class="skill-group__title">Móvil, escritorio y 3D</h4>
+              <ul class="tags" role="list">
+                <li class="tag">React Native</li>
+                <li class="tag">Tauri</li>
+                <li class="tag">Three.js</li>
+                <li class="tag">Blender</li>
+                <li class="tag">ESP32</li>
+              </ul>
+            </div>
+            <div class="skill-group reveal" style="--i: 2">
+              <h4 class="skill-group__title">Back-end y datos</h4>
+              <ul class="tags" role="list">
+                <li class="tag">Node.js</li>
+                <li class="tag">Express</li>
+                <li class="tag">Java</li>
+                <li class="tag">Spring Boot</li>
+                <li class="tag">Python</li>
+                <li class="tag">SQL</li>
+                <li class="tag">MySQL</li>
+                <li class="tag">PostgreSQL</li>
+                <li class="tag">Supabase</li>
+                <li class="tag">Meilisearch</li>
+                <li class="tag">Odoo</li>
+              </ul>
+            </div>
+            <div class="skill-group reveal" style="--i: 3">
+              <h4 class="skill-group__title">Herramientas</h4>
+              <ul class="tags" role="list">
+                <li class="tag">Git</li>
+                <li class="tag">GitHub</li>
+                <li class="tag">GitHub Actions</li>
+                <li class="tag">Docker</li>
+                <li class="tag">Vercel</li>
+                <li class="tag">Vitest</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         03 — EXPERIENCIA
+         ==================================================================== -->
+    <section class="section" id="experiencia" data-section="experiencia" aria-labelledby="experiencia-title">
+      <div class="container">
+        <div class="section-head grid reveal">
+          <p class="section-head__num label" aria-hidden="true">03 —</p>
+          <h2 class="section-head__title" id="experiencia-title">Experiencia</h2>
+          <p class="section-head__desc">Dos periodos de prácticas: desarrollo de apps móviles y soporte técnico.</p>
+        </div>
+
+        <ol class="timeline" role="list">
+          <li class="timeline__item reveal">
+            <p class="timeline__date label"><time datetime="2026-03">Mar 2026</time> — <time datetime="2026-06">Jun 2026</time></p>
+            <div class="timeline__body">
+              <h3 class="timeline__role">Programador Junior en prácticas</h3>
+              <p class="timeline__org">Siweb AI Solutions · Vigo</p>
+              <ul class="timeline__list" role="list">
+                <li>Desarrollé NexusCall, una aplicación de llamadas con React Native.</li>
+                <li>Desarrollé NutrIA, una app de fitness y nutrición con React Native: recomendación de comidas, conteo de calorías y planes de entrenamiento y dieta.</li>
+                <li>Persistencia de datos con MySQL y Supabase.</li>
+              </ul>
+            </div>
+          </li>
+          <li class="timeline__item reveal">
+            <p class="timeline__date label"><time datetime="2024-03">Mar 2024</time> — <time datetime="2024-06">Jun 2024</time></p>
+            <div class="timeline__body">
+              <h3 class="timeline__role">Asistente de Técnico en prácticas</h3>
+              <p class="timeline__org">AlexLibera SAT · Redondela</p>
+              <ul class="timeline__list" role="list">
+                <li>Reparación y mantenimiento de equipos, incluida la sustitución de componentes.</li>
+                <li>Atención al cliente presencial.</li>
+              </ul>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         04 — FORMACIÓN
+         ==================================================================== -->
+    <section class="section section--flush-top" id="formacion" data-section="experiencia" aria-labelledby="formacion-title">
+      <div class="container">
+        <div class="section-head grid reveal">
+          <p class="section-head__num label" aria-hidden="true">04 —</p>
+          <h2 class="section-head__title" id="formacion-title">Formación</h2>
+        </div>
+
+        <ol class="timeline timeline--compact" role="list">
+          <li class="timeline__item reveal">
+            <p class="timeline__date label"><time datetime="2024">2024</time> — <time datetime="2026">2026</time></p>
+            <div class="timeline__body">
+              <h3 class="timeline__role">Técnico Superior en Desarrollo de Aplicaciones Multiplataforma (DAM)</h3>
+              <p class="timeline__org">CPR Cebem · Incluye Odoo (ERP) y CI/CD con GitHub Actions</p>
+            </div>
+            <p class="timeline__type label">Ciclo superior</p>
+          </li>
+          <li class="timeline__item reveal">
+            <p class="timeline__date label"><time datetime="2022">2022</time> — <time datetime="2024">2024</time></p>
+            <div class="timeline__body">
+              <h3 class="timeline__role">Técnico en Instalaciones de Telecomunicaciones</h3>
+              <p class="timeline__org">IES Pedro Floriani</p>
+            </div>
+            <p class="timeline__type label">Ciclo medio</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         05 — CONTACTO (sección invertida)
+         ==================================================================== -->
+    <section class="section is-inverted" id="contacto" data-section="contacto" aria-labelledby="contacto-title">
+      <div class="container">
+        <div class="section-head section-head--display grid reveal">
+          <p class="section-head__num label" aria-hidden="true">05 —</p>
+          <h2 class="section-head__title contact__title" id="contacto-title">¿Trabajamos juntos?</h2>
+        </div>
+
+        <div class="contact__intro grid reveal">
+          <p class="contact__lead">Busco mi primer puesto como desarrollador junior. Si tienes una vacante o un proyecto en el que pueda aportar, escríbeme.</p>
+        </div>
+
+        <div class="contact__email-row reveal">
+          <a class="contact__email link" href="mailto:lucasperezfernandez0@gmail.com">lucasperezfernandez0@gmail.com</a>
+          <button class="btn btn--secondary btn--sm contact__copy" type="button" aria-label="Copiar email al portapapeles" data-copy="lucasperezfernandez0@gmail.com">
+            <svg class="icon icon--copy" aria-hidden="true" focusable="false"><use href="#i-copy"/></svg>
+            <svg class="icon icon--check" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>
+            <span data-copy-label>Copiar</span>
+          </button>
+          <span class="visually-hidden" role="status" data-copy-status></span>
+        </div>
+
+        <div class="contact__grid grid">
+          <div class="contact__aside reveal">
+            <div class="contact__block">
+              <h3 class="contact__block-title label">Código</h3>
+              <!-- Para añadir LinkedIn u otra red, copia el <li> -->
+              <ul class="social-list" role="list">
+                <li><a href="https://github.com/LucasPrezFdez" target="_blank" rel="noopener noreferrer">GitHub<span class="visually-hidden"> (se abre en una pestaña nueva)</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-external"/></svg></a></li>
+              </ul>
+            </div>
+            <div class="contact__block">
+              <h3 class="contact__block-title label">Ubicación</h3>
+              <p>Redondela, Pontevedra<br>Carné B y vehículo propio.</p>
+            </div>
+          </div>
+
+          <div class="contact__form-wrap reveal" style="--i: 1">
+            <h3 class="contact__form-title">Escríbeme</h3>
+            <!-- REEMPLAZAR: sustituye TU_ID_DE_FORMULARIO por el ID de tu formulario de Formspree -->
+            <form class="form" action="https://formspree.io/f/TU_ID_DE_FORMULARIO" method="POST" data-contact-form data-email="lucasperezfernandez0@gmail.com">
+              <p class="form__note">Todos los campos son obligatorios.</p>
+
+              <div class="field">
+                <label class="field__label label" for="nombre">Nombre</label>
+                <input class="field__input" id="nombre" name="nombre" type="text" autocomplete="name" required minlength="2" aria-describedby="nombre-error" data-validate>
+                <p class="field__error" id="nombre-error"></p>
+              </div>
+
+              <div class="field">
+                <label class="field__label label" for="email">Email</label>
+                <input class="field__input" id="email" name="email" type="email" autocomplete="email" inputmode="email" spellcheck="false" required aria-describedby="email-error" data-validate>
+                <p class="field__error" id="email-error"></p>
+              </div>
+
+              <div class="field">
+                <label class="field__label label" for="mensaje">Mensaje</label>
+                <textarea class="field__input" id="mensaje" name="mensaje" rows="6" required minlength="20" aria-describedby="mensaje-hint mensaje-error" data-validate></textarea>
+                <p class="field__hint" id="mensaje-hint">Cuéntame la oferta o el proyecto. Mínimo 20 caracteres.</p>
+                <p class="field__error" id="mensaje-error"></p>
+              </div>
+
+              <!-- Antispam de Formspree: los bots rellenan este campo oculto -->
+              <div class="form__honeypot" aria-hidden="true">
+                <label for="sitio-web">No rellenes este campo</label>
+                <input id="sitio-web" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+              </div>
+              <input type="hidden" name="_subject" value="Nuevo mensaje desde el portfolio">
+
+              <div>
+                <button class="btn btn--primary" type="submit">
+                  <span data-submit-label>Enviar mensaje</span>
+                  <svg class="icon icon--right" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg>
+                </button>
+              </div>
+
+              <p class="form__status" role="status" data-form-status></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======================================================================
+       FOOTER
+       ====================================================================== -->
+  <footer class="site-footer is-inverted">
+    <div class="container">
+      <div class="site-footer__inner">
+        <p class="site-footer__copy label">© <span data-year>2026</span> Lucas Pérez Fernández</p>
+        <ul class="site-footer__links label" role="list">
+          <li><a class="link" href="https://github.com/LucasPrezFdez" target="_blank" rel="noopener noreferrer">GitHub<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a></li>
+        </ul>
+        <a class="back-to-top label" href="#inicio">
+          Volver arriba
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================================
+       MODAL: CASOS DE ESTUDIO
+       Estructura de cada caso: Contexto → Problema → Proceso → Solución →
+       Resultados → Herramientas → Enlace externo.
+       Redactados a partir del código y los README de cada repositorio.
+       REEMPLAZAR: añade el enlace a la demo de GameIndex si la vuelves a publicar.
+       Se puede enlazar directamente a un caso: /#caso-gameindex
+       ====================================================================== -->
+  <dialog class="case-dialog" aria-labelledby="caso-gameindex-title" data-dialog>
+    <div class="case-dialog__bar">
+      <p class="case-dialog__counter label" data-dialog-counter>Caso 01 / 02</p>
+      <button class="case-dialog__close" type="button" data-dialog-close>
+        Cerrar
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-close"/></svg>
+      </button>
+    </div>
+
+    <div class="case-dialog__scroll" data-dialog-scroll>
+
+      <!-- Caso 01 -->
+      <article class="case" id="caso-gameindex" data-case hidden>
+        <header class="case__header">
+          <p class="case__eyebrow label">Proyecto de fin de ciclo · 2026</p>
+          <h2 class="case__title" id="caso-gameindex-title" tabindex="-1">GameIndex — Reseñas de videojuegos</h2>
+          <p class="case__summary">Base de datos, red social y agregador de reseñas de videojuegos en una sola web.</p>
+          <dl class="case__meta">
+            <div><dt class="label">Tipo</dt><dd>Proyecto de fin de ciclo</dd></div>
+            <div><dt class="label">Rol</dt><dd>Desarrollo individual</dd></div>
+            <div><dt class="label">Año</dt><dd>2026</dd></div>
+            <div><dt class="label">Stack</dt><dd>Next.js + PostgreSQL</dd></div>
+          </dl>
+        </header>
+        <figure class="case__media">
+          <img src="assets/img/proyecto-gameindex.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Portada de GameIndex con algunas de sus rutas, como /games, /rankings/top-50 y /lists, y sus cifras: 29 páginas, 39 endpoints y 65 componentes.">
+        </figure>
+        <div class="case__block">
+          <h3 class="case__block-title"><span class="label">01</span>Contexto</h3>
+          <p>Mi proyecto de fin de ciclo: una plataforma que junta en un mismo sitio el catálogo de videojuegos, los perfiles de jugador, las reseñas y las listas.</p>
+        </div>
+        <div class="case__block">
+          <h3 class="case__block-title"><span class="label">02</span>Problema</h3>
+          <p>El catálogo depende de APIs externas que pueden fallar o no estar configuradas, y una red social necesita usuarios, moderación y contenido desde el primer día para poder probarse.</p>
+        </div>
+        <div class="case__block">
+          <h3 class="case__block-title"><span class="label">03</span>Proceso</h3>
+          <ol class="case__steps" role="list">
+            <li>Diseñé el esquema en PostgreSQL (Neon): usuarios, perfiles, juegos, reseñas, valoraciones y listas.</li>
+            <li>Integré RAWG para el catálogo paginado desde el servidor, con datos locales de respaldo si falta la clave de la API.</li>
+            <li>Implementé autenticación propia con tokens firmados y un panel de administración con baneos, reportes y auditoría.</li>
+            <li>Escribí un script idempotente que siembra 50 perfiles, unas 110 listas y unas 100 reseñas para probar con datos realistas.</li>
+          </ol>
+        </div>
+        <div class="case__block">
+          <h3 class="case__block-title"><span class="label">04</span>Solución</h3>
+          <p>Una aplicación con Next.js (App Router) y búsqueda en Meilisearch. Tiene fichas de juego, rankings por década y top 50, páginas de plataformas, géneros y compañías, perfiles públicos y biblioteca personal.</p>
+        </div>
+        <div class="case__block">
+          <h3 class="case__block-title"><span class="label">05</span>Resultados</h3>
+          <dl class="metrics">
+            <div class="metric"><dt class="metric__label">páginas en la aplicación</dt><dd class="metric__value">29</dd></div>
+            <div class="metric"><dt class="metric__label">endpoints de API</dt><dd class="metric__value">39</dd></div>
+            <div class="metric"><dt class="metric__label">componentes de interfaz</dt><dd class="metric__value">65</dd></div>
+          </dl>
+        </div>
+        <div class="case__block">
+          <h3 class="case__block-title"><span class="label">06</span>Herramientas</h3>
+          <ul class="tags" role="list">
+            <li class="tag">Next.js</li>
+            <li class="tag">TypeScript</li>
+            <li class="tag">Tailwind CSS</li>
+            <li class="tag">PostgreSQL (Neon)</li>
+            <li class="tag">Meilisearch</li>
+            <li class="tag">Tiptap</li>
+          </ul>
+        </div>
+        <footer class="case__footer">
+          <a class="btn btn--primary" href="https://github.com/LucasPrezFdez/TFC" target="_blank" rel="noopener noreferrer">
+            Ver código en GitHub<span class="visually-hidden"> (se abre en una pestaña nueva)</span>
+            <svg class="icon icon--external" aria-hidden="true" focusable="false"><use href="#i-external"/></svg>
+          </a>
+          <button class="btn btn--secondary" type="button" data-goto-case="caso-desktopfriend">
+            Siguiente: DesktopFriend
+            <svg class="icon icon--right" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg>
+          </button>
+        </footer>
+      </article>
+
+      <!-- Caso 02 -->
+      <article class="case" id="caso-desktopfriend" data-case hidden>
+        <header class="case__header">
+          <p class="case__eyebrow label">Proyecto personal · 2026</p>
+          <h2 class="case__title" id="caso-desktopfriend-title" tabindex="-1">DesktopFriend — Mascota de escritorio</h2>
+          <p class="case__summary">Un perro en 3D que vive sobre la barra de tareas de Windows 11 y al que hay que cuidar.</p>
+          <dl class="case__meta">
+            <div><dt class="label">Tipo</dt><dd>Proyecto personal</dd></div>
+            <div><dt class="label">Rol</dt><dd>Desarrollo completo</dd></div>
+            <div><dt class="label">Año</dt><dd>2026</dd></div>
+            <div><dt class="label">Plataforma</dt><dd>Windows 11</dd></div>
+          </dl>
+        </header>
+        <figure class="case__media">
+          <img src="assets/img/proyecto-desktopfriend.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Seis poses del perro 3D de DesktopFriend: de pie, sentado, jugando, andando, comiendo de su cuenco y cogido por el collar.">
+        </figure>
+        <div class="case__block">
+          <h3 class="case__block-title"><span class="label">01</span>Contexto</h3>
+          <p>Una aplicación de escritorio en la que la mascota pasea, se sienta, duerme y reacciona al ratón. Tiene hambre, felicidad y energía, que bajan con el tiempo.</p>
+        </div>
+        <div class="case__block">
+          <h3 class="case__block-title"><span class="label">02</span>Problema</h3>
+          <p>Una ventana transparente encima del escritorio no puede estorbar: los clics tienen que llegar a las aplicaciones de debajo, salvo cuando el cursor está sobre la mascota.</p>
+        </div>
+        <div class="case__block">
+          <h3 class="case__block-title"><span class="label">03</span>Proceso</h3>
+          <ol class="case__steps" role="list">
+            <li>Comparé frameworks de escritorio y formas de crear el modelo 3D, y documenté cada decisión con sus alternativas.</li>
+            <li>Generé los modelos (perro y cama) con scripts de Blender a partir de un modelo libre (CC0).</li>
+            <li>Separé la lógica en módulos: necesidades como funciones puras, comportamiento, gestos del ratón e interfaz.</li>
+            <li>Creé herramientas que controlan la app en marcha por el protocolo de depuración para comprobar cada animación con capturas.</li>
+          </ol>
+        </div>
+        <div class="case__block">
+          <h3 class="case__block-title"><span class="label">04</span>Solución</h3>
+          <p>Tauri 2 para la parte nativa (ventanas, bandeja del sistema y arranque con Windows) y Three.js para la escena 3D. Se acaricia frotando el cursor, se le da de comer desde un menú circular y se le lleva a su cama arrastrándolo. Se distribuye con un instalador .exe.</p>
+        </div>
+        <div class="case__block">
+          <h3 class="case__block-title"><span class="label">05</span>Resultados</h3>
+          <dl class="metrics">
+            <div class="metric"><dt class="metric__label">decisiones técnicas documentadas</dt><dd class="metric__value">27</dd></div>
+            <div class="metric"><dt class="metric__label">scripts de verificación automática</dt><dd class="metric__value">13</dd></div>
+            <div class="metric"><dt class="metric__label">mascotas intercambiables</dt><dd class="metric__value">2</dd></div>
+          </dl>
+        </div>
+        <div class="case__block">
+          <h3 class="case__block-title"><span class="label">06</span>Herramientas</h3>
+          <ul class="tags" role="list">
+            <li class="tag">Tauri 2</li>
+            <li class="tag">Three.js</li>
+            <li class="tag">TypeScript</li>
+            <li class="tag">Vite</li>
+            <li class="tag">Vitest</li>
+            <li class="tag">Blender</li>
+          </ul>
+        </div>
+        <footer class="case__footer">
+          <a class="btn btn--primary" href="https://github.com/LucasPrezFdez/desktop_friend" target="_blank" rel="noopener noreferrer">
+            Ver código en GitHub<span class="visually-hidden"> (se abre en una pestaña nueva)</span>
+            <svg class="icon icon--external" aria-hidden="true" focusable="false"><use href="#i-external"/></svg>
+          </a>
+          <button class="btn btn--secondary" type="button" data-goto-case="caso-gameindex">
+            Siguiente: GameIndex
+            <svg class="icon icon--right" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg>
+          </button>
+        </footer>
+      </article>
+
+    </div>
+  </dialog>
+
+  <script>
+    /* ==========================================================================
+       JAVASCRIPT
+       01. Utilidades
+       02. Año actual en el footer
+       03. Header: ocultar al bajar, mostrar al subir
+       04. Menú móvil
+       05. Enlace activo en la navegación
+       06. Aparición de elementos al hacer scroll
+       07. Modal de casos de estudio
+       08. Copiar email al portapapeles
+       09. Formulario de contacto (validación + Formspree)
+       ========================================================================== */
+    (() => {
+      'use strict';
+
+      /* ---------- 01. Utilidades ---------- */
+      const root = document.documentElement;
+      const $ = (selector, context = document) => context.querySelector(selector);
+      const $$ = (selector, context = document) => Array.from(context.querySelectorAll(selector));
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      // Bloqueo de scroll compartido entre el menú y el modal
+      const scrollLocks = new Set();
+      const setScrollLock = (key, locked) => {
+        if (locked) scrollLocks.add(key);
+        else scrollLocks.delete(key);
+        const shouldLock = scrollLocks.size > 0;
+        if (shouldLock && !root.classList.contains('is-locked')) {
+          root.style.setProperty('--lock-gap', `${window.innerWidth - root.clientWidth}px`);
+        }
+        root.classList.toggle('is-locked', shouldLock);
+      };
+
+      /* ---------- 02. Año actual ---------- */
+      $$('[data-year]').forEach((el) => {
+        el.textContent = String(new Date().getFullYear());
+      });
+
+      /* ---------- 03. Header ---------- */
+      const header = $('[data-header]');
+      let lastScrollY = window.scrollY;
+      let headerTicking = false;
+      let menuOpen = false;
+
+      const hasKeyboardFocus = (container) => {
+        try {
+          return Boolean(container.querySelector(':focus-visible'));
+        } catch (error) {
+          return container.contains(document.activeElement);
+        }
+      };
+
+      const updateHeader = () => {
+        const y = Math.max(window.scrollY, 0);
+        header.classList.toggle('is-scrolled', y > 8);
+
+        const delta = y - lastScrollY;
+        if (Math.abs(delta) > 6) {
+          const hide = delta > 0 && y > header.offsetHeight * 2 && !menuOpen && !hasKeyboardFocus(header);
+          header.classList.toggle('is-hidden', hide);
+          lastScrollY = y;
+        }
+        headerTicking = false;
+      };
+
+      window.addEventListener('scroll', () => {
+        if (headerTicking) return;
+        headerTicking = true;
+        requestAnimationFrame(updateHeader);
+      }, { passive: true });
+
+      // Si se navega con teclado hasta el header, se muestra
+      header.addEventListener('focusin', () => header.classList.remove('is-hidden'));
+      updateHeader();
+
+      /* ---------- 04. Menú móvil ---------- */
+      const menuToggle = $('[data-menu-toggle]');
+      const menu = $('[data-menu]');
+      const backgroundRegions = $$('main, .site-footer, .skip-link');
+      const desktopQuery = window.matchMedia('(min-width: 1024px)');
+
+      const setMenu = (open, { restoreFocus = true } = {}) => {
+        if (open === menuOpen) return;
+        menuOpen = open;
+
+        menuToggle.setAttribute('aria-expanded', String(open));
+        menuToggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+        menu.classList.toggle('is-open', open);
+        header.classList.toggle('is-inverted', open);
+        header.classList.remove('is-hidden');
+
+        // inert deja el resto de la página fuera del foco y del lector de pantalla
+        backgroundRegions.forEach((el) => { el.inert = open; });
+        setScrollLock('menu', open);
+
+        if (open) {
+          const firstLink = $('a', menu);
+          if (firstLink) firstLink.focus({ preventScroll: true });
+        } else if (restoreFocus) {
+          menuToggle.focus({ preventScroll: true });
+        }
+      };
+
+      menuToggle.addEventListener('click', () => setMenu(!menuOpen));
+
+      $$('a', menu).concat($$('a', header)).forEach((link) => {
+        link.addEventListener('click', () => setMenu(false, { restoreFocus: false }));
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && menuOpen) setMenu(false);
+      });
+
+      desktopQuery.addEventListener('change', (event) => {
+        if (event.matches) setMenu(false, { restoreFocus: false });
+      });
+
+      /* ---------- 05. Enlace activo ---------- */
+      const navLinks = $$('[data-nav-link]');
+
+      const setActiveLink = (id) => {
+        navLinks.forEach((link) => {
+          if (id && link.getAttribute('href') === `#${id}`) link.setAttribute('aria-current', 'true');
+          else link.removeAttribute('aria-current');
+        });
+      };
+
+      if ('IntersectionObserver' in window) {
+        const sectionObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) setActiveLink(entry.target.dataset.section);
+          });
+        }, { rootMargin: '-40% 0px -55% 0px' });
+
+        $$('[data-section]').forEach((section) => sectionObserver.observe(section));
+      }
+
+      /* ---------- 06. Aparición al hacer scroll ---------- */
+      const revealItems = $$('.reveal');
+
+      if (!('IntersectionObserver' in window) || reduceMotion.matches) {
+        revealItems.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          });
+        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+
+        revealItems.forEach((el) => revealObserver.observe(el));
+      }
+
+      /* ---------- 07. Modal de casos de estudio ---------- */
+      const dialog = $('[data-dialog]');
+      const cases = $$('[data-case]', dialog);
+      const dialogScroll = $('[data-dialog-scroll]', dialog);
+      const dialogCounter = $('[data-dialog-counter]', dialog);
+      const pad = (n) => String(n).padStart(2, '0');
+      let caseTrigger = null;
+
+      // Muestra un caso dentro del modal y devuelve su título
+      const renderCase = (id) => {
+        const index = cases.findIndex((item) => item.id === id);
+        if (index === -1) return null;
+
+        cases.forEach((item, i) => { item.hidden = i !== index; });
+        const title = $('.case__title', cases[index]);
+        dialog.setAttribute('aria-labelledby', title.id);
+        dialogCounter.textContent = `Caso ${pad(index + 1)} / ${pad(cases.length)}`;
+        dialogScroll.scrollTop = 0;
+        return title;
+      };
+
+      const openCase = (id, trigger) => {
+        if (!renderCase(id)) return;
+        caseTrigger = trigger || null;
+        if (!dialog.open) {
+          dialog.showModal();
+          setScrollLock('dialog', true);
+        }
+        history.replaceState(null, '', `#${id}`);
+      };
+
+      $$('[data-open-case]').forEach((button) => {
+        button.addEventListener('click', () => openCase(button.dataset.openCase, button));
+      });
+
+      $$('[data-goto-case]', dialog).forEach((button) => {
+        button.addEventListener('click', () => {
+          const id = button.dataset.gotoCase;
+          const title = renderCase(id);
+          if (!title) return;
+          caseTrigger = $(`[data-open-case="${id}"]`) || caseTrigger;
+          history.replaceState(null, '', `#${id}`);
+          title.focus();
+        });
+      });
+
+      $('[data-dialog-close]', dialog).addEventListener('click', () => dialog.close());
+
+      // Clic fuera del panel (sobre el fondo) cierra el modal
+      dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+
+      // Escape cierra el modal de forma nativa; aquí se restaura el estado
+      dialog.addEventListener('close', () => {
+        setScrollLock('dialog', false);
+        history.replaceState(null, '', `${location.pathname}${location.search}`);
+        if (caseTrigger && caseTrigger.isConnected) caseTrigger.focus();
+        caseTrigger = null;
+      });
+
+      // Enlaces directos a un caso: /#caso-lumen
+      const openCaseFromHash = () => {
+        const id = decodeURIComponent(location.hash.slice(1));
+        if (id && cases.some((item) => item.id === id)) {
+          openCase(id, $(`[data-open-case="${id}"]`));
+        }
+      };
+      window.addEventListener('hashchange', openCaseFromHash);
+      openCaseFromHash();
+
+      /* ---------- 08. Copiar email ---------- */
+      const copyButton = $('[data-copy]');
+      const copyLabel = $('[data-copy-label]', copyButton);
+      const copyStatus = $('[data-copy-status]');
+      let copyTimer;
+
+      // Alternativa para navegadores sin API de portapapeles o fuera de HTTPS
+      const legacyCopy = (text) => {
+        const field = document.createElement('textarea');
+        field.value = text;
+        field.setAttribute('readonly', '');
+        field.style.position = 'fixed';
+        field.style.opacity = '0';
+        document.body.appendChild(field);
+        field.select();
+        let copied = false;
+        try {
+          copied = document.execCommand('copy');
+        } catch (error) {
+          copied = false;
+        }
+        field.remove();
+        return copied;
+      };
+
+      copyButton.addEventListener('click', async () => {
+        const text = copyButton.dataset.copy;
+        let copied;
+        try {
+          await navigator.clipboard.writeText(text);
+          copied = true;
+        } catch (error) {
+          copied = legacyCopy(text);
+        }
+
+        copyButton.classList.toggle('is-copied', copied);
+        copyLabel.textContent = copied ? 'Copiado' : 'Cópialo a mano';
+        copyStatus.textContent = copied
+          ? 'Email copiado al portapapeles.'
+          : 'No se ha podido copiar. Selecciona el email y cópialo manualmente.';
+
+        clearTimeout(copyTimer);
+        copyTimer = setTimeout(() => {
+          copyButton.classList.remove('is-copied');
+          copyLabel.textContent = 'Copiar';
+          copyStatus.textContent = '';
+        }, 2400);
+      });
+
+      /* ---------- 09. Formulario de contacto ---------- */
+      const form = $('[data-contact-form]');
+      const fields = $$('[data-validate]', form);
+      const formStatus = $('[data-form-status]', form);
+      const submitButton = $('[type="submit"]', form);
+      const submitLabel = $('[data-submit-label]', form);
+      const fallbackEmail = form.dataset.email;
+      const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+      const MIN_MESSAGE = 20;
+      let sending = false;
+
+      const validators = {
+        nombre: (value) => {
+          if (!value) return 'Escribe tu nombre.';
+          if (value.length < 2) return 'El nombre debe tener al menos 2 caracteres.';
+          return '';
+        },
+        email: (value) => {
+          if (!value) return 'Escribe tu email para que pueda responderte.';
+          if (!EMAIL_PATTERN.test(value)) return 'El email no parece válido. Ejemplo: nombre@dominio.com';
+          return '';
+        },
+        mensaje: (value) => {
+          if (!value) return 'Cuéntame en qué puedo ayudarte.';
+          if (value.length < MIN_MESSAGE) return `Escribe al menos ${MIN_MESSAGE} caracteres (llevas ${value.length}).`;
+          return '';
+        },
+      };
+
+      const validateField = (field) => {
+        const message = validators[field.name](field.value.trim());
+        $(`#${field.id}-error`, form).textContent = message;
+        if (message) field.setAttribute('aria-invalid', 'true');
+        else field.removeAttribute('aria-invalid');
+        return !message;
+      };
+
+      const setFormStatus = (message, state = '') => {
+        formStatus.textContent = message;
+        formStatus.dataset.state = state;
+      };
+
+      const setSending = (value) => {
+        sending = value;
+        submitButton.setAttribute('aria-disabled', String(value));
+        if (value) form.setAttribute('aria-busy', 'true');
+        else form.removeAttribute('aria-busy');
+        submitLabel.textContent = value ? 'Enviando…' : 'Enviar mensaje';
+      };
+
+      // Con JS activo usamos validación propia (mensajes claros y accesibles)
+      form.noValidate = true;
+
+      fields.forEach((field) => {
+        field.addEventListener('blur', () => {
+          if (field.value.trim() !== '' || field.hasAttribute('aria-invalid')) validateField(field);
+        });
+        field.addEventListener('input', () => {
+          if (field.hasAttribute('aria-invalid')) validateField(field);
+        });
+      });
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (sending) return;
+
+        const invalidFields = fields.filter((field) => !validateField(field));
+        if (invalidFields.length) {
+          setFormStatus(
+            invalidFields.length === 1 ? 'Revisa el campo marcado.' : `Revisa los ${invalidFields.length} campos marcados.`,
+            'error'
+          );
+          invalidFields[0].focus();
+          return;
+        }
+
+        // Honeypot: si un bot lo rellena, no se envía
+        if (form.elements._gotcha && form.elements._gotcha.value) return;
+
+        if (form.action.includes('TU_ID_DE_FORMULARIO')) {
+          setFormStatus(`El formulario aún no está conectado. Mientras tanto, escríbeme a ${fallbackEmail}.`, 'error');
+          return;
+        }
+
+        setSending(true);
+        setFormStatus('');
+
+        try {
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { Accept: 'application/json' },
+          });
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+          form.reset();
+          setFormStatus('Gracias. Tu mensaje ha llegado y te responderé en menos de 48 horas.', 'success');
+        } catch (error) {
+          setFormStatus(`No se ha podido enviar el mensaje. Inténtalo de nuevo o escríbeme a ${fallbackEmail}.`, 'error');
+        } finally {
+          setSending(false);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
